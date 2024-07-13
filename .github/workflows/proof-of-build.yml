@@ -1,0 +1,33 @@
+name: proof-of-build
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - .github/workflows/proof-of-build.yml
+      - PDAL-*.Dockerfile
+
+jobs:
+
+  liniapower-schemas-container:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        pdal_version:
+          - "2.7.2"
+        debian_release:
+          - "bookworm"
+
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: build container
+        run: |
+          buildah bud -f PDAL-${{ matrix.pdal_version }}-${{ matrix.debian_release }}.Dockerfile -t PDAL-${{ matrix.pdal_version }}-${{ matrix.debian_release }}
+          buildah login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ghcr.io
+          buildah push PDAL-${{ matrix.pdal_version }}-${{ matrix.debian_release }} docker://ghcr.io/${{ github.repository }}/PDAL-${{ matrix.pdal_version }}-${{ matrix.debian_release }}:latest
