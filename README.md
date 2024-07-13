@@ -15,7 +15,7 @@ PDAL was available as [Bullseye Debian package](https://packages.debian.org/bull
 Given a specific version of PDAL and a specific Debian release,
 there is a Dockerfile with all dependencies and build steps:
 
-`buildah bud -f PDAL-2.7.2-bookworm.Dockerfile`
+`buildah bud -f Dockerfile.PDAL-2.7.2-bookworm`
 
 
 ### If something fails
@@ -46,3 +46,17 @@ the failing test is `pdal_filters_shell_test`, so you would then execute, in the
 ```
 ./build/bin/pdal_filters_shell_test
 ```
+
+
+## GitHub Configuration
+
+Since this project uploads images to `ghcr.io`, some token is required. The current GitHub instructions are:
+
+1. Click on your profile picture in the upper-right corner of any page.
+2. Click 'Settings'.
+3. In the left sidebar, click 'Developer settings'.
+4. Click 'Personal access tokens'.
+5. Generate a new token with write:packages and read:packages access.
+6. Save this token as a secret in your repository settings and use it in your GitHub Actions workflow.
+
+Here we save the token as a _repository secret_ named `PACKAGE_WRITE_TOKEN`.
