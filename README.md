@@ -6,8 +6,7 @@ PDAL was available as [Bullseye Debian package](https://packages.debian.org/bull
 ## State of this project
 
 - there is no Debian package build yet, and no control file for that yet
-- we are at the proof-of-build stage, finding out whether the upstream project can be built on Debian, and what dependency that takes
-- currently the proof-of-build is failing, so some lines in the Dockerfile are disabled for further debugging
+- we did a proof-of-build using `Dockerfile.bookworm-PDAL-2.7.2`, asserting that the upstream project can be built on Debian, with which dependencies
 
 
 ## Proof-of-build
@@ -15,7 +14,9 @@ PDAL was available as [Bullseye Debian package](https://packages.debian.org/bull
 Given a specific version of PDAL and a specific Debian release,
 there is a Dockerfile with all dependencies and build steps:
 
-`buildah bud -f Dockerfile.PDAL-2.7.2-bookworm`
+`buildah bud -f Dockerfile.bookworm-PDAL-2.7.2`
+
+(You may need to run `buildah login ghcr.io` before, to access the base image.)
 
 
 ### If something fails

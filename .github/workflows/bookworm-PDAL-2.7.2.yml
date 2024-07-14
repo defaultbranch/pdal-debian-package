@@ -5,8 +5,8 @@ on:
     branches:
       - dev
     paths:
-      - .github/workflows/proof-of-build.yml
-      - Dockerfile.PDAL-*
+      - .github/workflows/bookworm-PDAL-2.7.2.yml
+      - Dockerfile.bookworm-PDAL-2.7.2
 
 jobs:
 
