@@ -1,0 +1,26 @@
+name: proof-of-build
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - .github/workflows/proof-of-build.yml
+      - Dockerfile.PDAL-*
+
+jobs:
+
+  liniapower-schemas-container:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: build container
+        run: |
+          buildah bud -f Dockerfile.bookworm-PDAL-2.7.2 -t bookworm-PDAL-2.7.2
+          buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGE_WRITE_TOKEN }} ghcr.io
+          buildah push bookworm-PDAL-2.7.2 docker://ghcr.io/${{ github.repository }}/bookworm-PDAL-2.7.2:latest
