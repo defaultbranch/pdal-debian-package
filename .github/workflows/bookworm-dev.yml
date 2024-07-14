@@ -1,0 +1,26 @@
+name: proof-of-build
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - .github/workflows/bookworm-dev.yml
+      - Dockerfile.bookworm-dev
+
+jobs:
+
+  liniapower-schemas-container:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: build container
+        run: |
+          buildah bud -f Dockerfile.bookworm-dev -t bookworm-dev
+          buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGE_WRITE_TOKEN }} ghcr.io
+          buildah push bookworm-dev docker://ghcr.io/${{ github.repository }}/bookworm-dev:latest
