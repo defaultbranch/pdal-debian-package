@@ -1,0 +1,6 @@
+FROM ghcr.io/defaultbranch/pdal-debian-package/bookworm-dev:latest
+RUN apt-get update && apt-get install -y build-essential devscripts debhelper && apt-get clean
+WORKDIR /
+RUN curl -sLo pdal_2.7.2.orig.tar.gz https://github.com/PDAL/PDAL/releases/download/2.7.2/PDAL-2.7.2-src.tar.gz
+RUN mkdir pdal-2.7.2 && tar xf pdal_2.7.2.orig.tar.gz -C pdal-2.7.2 --strip-components=1
+COPY pdal-2.7.2/debian pdal-2.7.2/debian
