@@ -21,6 +21,6 @@ jobs:
 
       - name: build container
         run: |
-          buildah bud -f Dockerfile.bookworm-pdal-2.7.2 -t bookworm-pdal-2.7.2
           buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGE_WRITE_TOKEN }} ghcr.io
+          buildah bud -f Dockerfile.bookworm-pdal-2.7.2 -t bookworm-pdal-2.7.2
           buildah push bookworm-pdal-2.7.2 docker://ghcr.io/${{ github.repository }}/bookworm-pdal-2.7.2:latest

@@ -2,7 +2,7 @@ FROM ghcr.io/defaultbranch/pdal-debian-package/bookworm-dev:latest
 WORKDIR /
 RUN git clone https://github.com/PDAL/PDAL.git --quiet --depth 1 --branch 2.7.2
 WORKDIR PDAL
-RUN apt-get install -y libproj-dev libgdal-dev gdal-bin
+RUN apt-get update && apt-get install -y libproj-dev libgdal-dev gdal-bin && apt-get clean
 RUN cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DBUILD_PGPOINTCLOUD_TESTS=OFF
 RUN cmake --build build --parallel 4
 RUN cmake --build build --target test --parallel 4
