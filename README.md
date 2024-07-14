@@ -6,7 +6,7 @@ PDAL was available as [Bullseye Debian package](https://packages.debian.org/bull
 ## State of this project
 
 - there is no Debian package build yet, and no control file for that yet
-- we did a proof-of-build using `Dockerfile.bookworm-PDAL-2.7.2`, asserting that the upstream project can be built on Debian, with which dependencies
+- we did a proof-of-build using `Dockerfile.bookworm-PDAL-2.7.2`, asserting that the upstream project can be built on Debian, and with which dependencies
 
 
 ## Proof-of-build
