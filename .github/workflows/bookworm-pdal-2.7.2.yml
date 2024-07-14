@@ -5,8 +5,8 @@ on:
     branches:
       - dev
     paths:
-      - .github/workflows/bookworm-PDAL-2.7.2.yml
-      - Dockerfile.bookworm-PDAL-2.7.2
+      - .github/workflows/bookworm-pdal-2.7.2.yml
+      - Dockerfile.bookworm-pdal-2.7.2
 
 jobs:
 
@@ -21,6 +21,6 @@ jobs:
 
       - name: build container
         run: |
-          buildah bud -f Dockerfile.bookworm-PDAL-2.7.2 -t bookworm-PDAL-2.7.2
+          buildah bud -f Dockerfile.bookworm-pdal-2.7.2 -t bookworm-pdal-2.7.2
           buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGE_WRITE_TOKEN }} ghcr.io
-          buildah push bookworm-PDAL-2.7.2 docker://ghcr.io/${{ github.repository }}/bookworm-PDAL-2.7.2:latest
+          buildah push bookworm-pdal-2.7.2 docker://ghcr.io/${{ github.repository }}/bookworm-pdal-2.7.2:latest
